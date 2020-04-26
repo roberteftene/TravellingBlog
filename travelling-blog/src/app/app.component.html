@@ -1,31 +1,23 @@
 <div class="container">
-
-  <nav>
-
-    <ul>
-
-      <li><a routerLink="/articles" routerLinkActive="active">Articles</a></li>
-      <li><a routerLink="/articles/1" routerLinkActive="active">First Article</a> </li>
-
+  <nav class="nav">
+    <ul class="nav__container">
+      <li class="nav__item">
+        <a href="" class="nav__link">Travel updates</a>
+      </li>
+      <li class="nav__item">
+        <a href="" class="nav__link">Reviews</a>
+      </li>
+      <li class="nav__item">
+        <a href="" class="nav__link">About</a>
+      </li>
+      <li class="nav__item">
+        <a href="" class="nav__link">Contact</a>
+      </li>
     </ul>
-
   </nav>
-
-  <div>
-    <input type="text" [(ngModel)] = "inputText" placeholder="Enter dog names"/>
-  </div>
-  <button type="button" (click)="addDog()">AddTheDog</button>
-
-  <div *ngIf="arrayOfDogs.length >= 2">
-
-    <div *ngFor="let dogs of arrayOfDogs">
-    <app-dogs [dogName]="dogs"></app-dogs>
-    </div>
-
-    
-  </div>
-
-
+  <router-outlet></router-outlet>
+  <footer class="footer">
+    <a href="#" class="footer__link">previous</a>
+    <a href="#" class="footer__link">next</a>
+  </footer>
 </div>
-
-<router-outlet></router-outlet>

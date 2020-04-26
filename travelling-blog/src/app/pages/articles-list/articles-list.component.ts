@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Article {
- title: string,
-content: string
-}
+import { Article } from 'src/app/models/article.model';
+import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
   selector: 'app-articles-list',
@@ -12,19 +9,32 @@ content: string
 })
 export class ArticlesListComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit(): void {
+    this.getArticles();
   }
 
-  article: Article[] = [
-    {
-      title: 'Primul articol',
-      content: 'Lorem ipsum'
-    },
+  articlesList: Article[];
+  isOpen: boolean = false;
 
-  ]
+  constructor(
+     private articleService: ArticleService
+  ) {}
+  
+  getArticles() {
+    this.articleService.getArticles().subscribe((response) => {
+      this.articlesList = response;
+    })
+  }
 
+  openModal() {
+    this.isOpen = !this.isOpen;
+  }
+  
+  deleteArticle(id: number) {
+    this.articleService.deleteArticle(id).subscribe((response) => {
+      this.getArticles();
+    })
+  }
   
 
 }
