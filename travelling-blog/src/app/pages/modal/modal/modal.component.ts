@@ -17,25 +17,39 @@ export class ModalComponent implements OnInit {
   }
 
   
-  article = new Article();
+  @Input() article: Article;
   articleList: Article[];
   isOpen = true;
 
   @Input() modal: Article;
   @Output() triggerGetArticles = new EventEmitter();
+  @Output() triggerSendArticle = new EventEmitter();
+  
+  // article ={} as Article;
 
   closeModal() {
     this.isOpen = !this.isOpen;
   }
 
-
-  onSave() {
-    this.articleService.postArticle(this.article).subscribe(response => {
-      this.isOpen = false;
-      this.triggerGetArticles.emit();
-    })
+  resetArticle() {
+    this.article = {
+      id: null,
+      title: '',
+      tag: '',
+      author: '',
+      date: '',
+      imgUrl: '',
+      content: ''
+    }
   }
 
 
+  onSave() {
+    this.triggerSendArticle.emit(this.article);
+   
+    this.resetArticle();
+    this.isOpen = false;
+  }
 
 }
+ 

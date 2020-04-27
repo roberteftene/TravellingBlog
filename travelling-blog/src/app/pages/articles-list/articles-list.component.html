@@ -3,7 +3,7 @@
 	
 </div>
 <main>
-	<app-modal (triggerGetArticles)="getArticles()" *ngIf="isOpen"></app-modal>	
+	<app-modal [article] = article  (triggerSendArticle)="saveArticle($event)" *ngIf="isOpen"></app-modal>	
 	<article *ngFor="let article of articlesList">
 		<h2 class="title">{{ article.title }}</h2>
 		<ul class="info__container">
@@ -14,8 +14,8 @@
 			<li class="info__item">{{ article.date }}</li>
 		</ul>
 		<div class="actions__container">
-			<button type="button" class="actions__btn" (click) ="deleteArticle(article.id)" >Edit</button>
-			<button type="button" class="actions__btn" >Delete</button>
+			<button type="button" class="actions__btn"  (click) = "editArticle(article.id,article)">Edit</button>
+			<button type="button" class="actions__btn" (click) ="deleteArticle(article.id)">Delete</button>
 		</div>
 
 		<img src="{{ article.imgUrl }}" alt="Image">
@@ -23,7 +23,7 @@
 			<p>{{ article.content }}</p>
 		</div>
 		<div class="readmore__container">
-			<button type="button" class="button">Read More</button>
+			<button  [routerLink]="['/articles/' + article.id]" type="button" class="button">Read More</button>
 		</div>
 	</article>
 </main>

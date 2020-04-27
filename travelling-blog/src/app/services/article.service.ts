@@ -18,4 +18,12 @@ export class ArticleService {
       deleteArticle(id: number): Observable<Article> {
         return this.http.delete(`http://localhost:3000/articles/${id}`) as Observable<Article>;
       } 
+
+      editArticle(article: Article): Observable<Article> {
+        return this.http.put(`http://localhost:3000/articles/${article.id}`,article) as Observable<Article>;
+      }
+
+      getArticleById(id: string) : Observable<Article> {
+        return this.http.get("http://localhost:3000/articles/" + id) as Observable<Article>;
+      }
 }
